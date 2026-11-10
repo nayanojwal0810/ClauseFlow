@@ -1,0 +1,71 @@
+policy_id: org_demo_vendor_contracts
+org_id: org_demo
+version: 1
+status: published
+effective_date: "2026-01-01"
+title: Vendor Contract Review Policy
+disclaimer: Synthetic company rules for an engineering demonstration; not legal advice.
+
+rules:
+  - rule_id: P-REN-01
+    business_area: renewal
+    version: 1
+    status: published
+    applies_to: commercial_vendor_contracts
+    rationale: Prevent unintended automatic contract renewals and vendor lock-in by enforcing a maximum notice lead-time of 60 calendar days for company non-renewal notices.
+    source_text: If a contract automatically renews and the company must give notice to prevent renewal, the required notice period must be at most 60 calendar days. A notice period of 61 or more calendar days requires legal exception approval.
+    severity: high
+    approver_role: legal_reviewer
+    conditions:
+      auto_renews_trigger: true
+      obligated_party: company
+      max_notice_days: 60
+      notice_unit: calendar_days
+    unknown_handling:
+      unclear_unit: NEEDS_REVIEW
+      business_days: NEEDS_REVIEW
+      months: NEEDS_REVIEW
+      unclear_party: NEEDS_REVIEW
+      conflicting_terms: NEEDS_REVIEW
+      no_clause_found: NOT_FOUND
+      explicit_no_renewal: NOT_APPLICABLE
+
+  - rule_id: P-TERM-01
+    business_area: termination
+    version: 1
+    status: published
+    applies_to: commercial_vendor_contracts
+    rationale: Ensure the company retains flexibility to exit vendor engagements without having to prove material breach or fault.
+    source_text: The company must have an affirmative right to terminate the contract for convenience without cause. Contracts that explicitly prohibit company convenience termination or restrict company termination exclusively to cause require legal exception approval.
+    severity: high
+    approver_role: legal_reviewer
+    conditions:
+      require_company_right: true
+      allow_cause_only: false
+    unknown_handling:
+      vendor_only_right: NEEDS_REVIEW
+      unclear_party: NEEDS_REVIEW
+      unclear_conditions: NEEDS_REVIEW
+      conflicting_terms: NEEDS_REVIEW
+      no_clause_found: NOT_FOUND
+
+  - rule_id: P-LIAB-01
+    business_area: liability
+    version: 1
+    status: published
+    applies_to: commercial_vendor_contracts
+    rationale: Protect the company from catastrophic and unbounded financial loss by requiring a clear aggregate monetary liability cap with no uncapped carve-outs.
+    source_text: The contract must provide a clear aggregate monetary cap on the company's liability with no uncapped carve-outs or unlimited liability for the company. Explicitly uncapped company liability or company carve-outs require legal exception approval.
+    severity: critical
+    approver_role: legal_reviewer
+    conditions:
+      require_company_cap: true
+      allow_company_uncapped: false
+      allow_uncapped_carveouts: false
+    unknown_handling:
+      vendor_only_cap: NEEDS_REVIEW
+      unclear_party: NEEDS_REVIEW
+      undefined_cap_amount: NEEDS_REVIEW
+      ambiguous_damage_scope: NEEDS_REVIEW
+      conflicting_terms: NEEDS_REVIEW
+      no_clause_found: NOT_FOUND

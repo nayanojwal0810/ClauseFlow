@@ -1,0 +1,180 @@
+{
+  "org_id": "org_demo",
+  "description": "Fictional organization access control and contract allocation fixture for authorization tests.",
+  "disclaimer": "Synthetic access control fixtures for application demonstration; not derived from CUAD dataset permissions.",
+  "teams": [
+    {
+      "team_id": "procurement_a",
+      "name": "Procurement Team A",
+      "assigned_contracts": [
+        "cuad_0038374672b578e9",
+        "cuad_0084b1ca188dfb5c",
+        "cuad_03a1e0f461f5359c"
+      ]
+    },
+    {
+      "team_id": "procurement_b",
+      "name": "Procurement Team B",
+      "assigned_contracts": [
+        "cuad_03e9a903a7a78669",
+        "cuad_052975b81f9779a6",
+        "cuad_0556ac8375017003"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "analyst_alice",
+      "role": "analyst",
+      "team_id": "procurement_a",
+      "can_read_contracts": [
+        "cuad_0038374672b578e9",
+        "cuad_0084b1ca188dfb5c",
+        "cuad_03a1e0f461f5359c"
+      ]
+    },
+    {
+      "username": "analyst_bob",
+      "role": "analyst",
+      "team_id": "procurement_b",
+      "can_read_contracts": [
+        "cuad_03e9a903a7a78669",
+        "cuad_052975b81f9779a6",
+        "cuad_0556ac8375017003"
+      ]
+    },
+    {
+      "username": "legal_reviewer",
+      "role": "legal_reviewer",
+      "team_id": null,
+      "can_read_contracts": [
+        "cuad_0038374672b578e9",
+        "cuad_0084b1ca188dfb5c",
+        "cuad_03a1e0f461f5359c",
+        "cuad_03e9a903a7a78669",
+        "cuad_052975b81f9779a6",
+        "cuad_0556ac8375017003"
+      ]
+    },
+    {
+      "username": "policy_admin",
+      "role": "policy_admin",
+      "team_id": null,
+      "can_read_contracts": []
+    }
+  ],
+  "contract_allocations": [
+    {
+      "contract_id": "cuad_0038374672b578e9",
+      "team_id": "procurement_a",
+      "split": "development"
+    },
+    {
+      "contract_id": "cuad_0084b1ca188dfb5c",
+      "team_id": "procurement_a",
+      "split": "development"
+    },
+    {
+      "contract_id": "cuad_03a1e0f461f5359c",
+      "team_id": "procurement_a",
+      "split": "development"
+    },
+    {
+      "contract_id": "cuad_03e9a903a7a78669",
+      "team_id": "procurement_b",
+      "split": "development"
+    },
+    {
+      "contract_id": "cuad_052975b81f9779a6",
+      "team_id": "procurement_b",
+      "split": "development"
+    },
+    {
+      "contract_id": "cuad_0556ac8375017003",
+      "team_id": "procurement_b",
+      "split": "development"
+    }
+  ],
+  "action_examples": [
+    {
+      "example_id": "ACT-01",
+      "actor": "analyst_alice",
+      "action": "read_contract",
+      "contract_id": "cuad_0038374672b578e9",
+      "expected_allowed": true,
+      "reason": "contract_assigned_to_actor_team"
+    },
+    {
+      "example_id": "ACT-02",
+      "actor": "analyst_alice",
+      "action": "read_contract",
+      "contract_id": "cuad_03e9a903a7a78669",
+      "expected_allowed": false,
+      "reason": "cross_team_contract_read_denied"
+    },
+    {
+      "example_id": "ACT-03",
+      "actor": "analyst_bob",
+      "action": "read_contract",
+      "contract_id": "cuad_03e9a903a7a78669",
+      "expected_allowed": true,
+      "reason": "contract_assigned_to_actor_team"
+    },
+    {
+      "example_id": "ACT-04",
+      "actor": "analyst_bob",
+      "action": "read_contract",
+      "contract_id": "cuad_0038374672b578e9",
+      "expected_allowed": false,
+      "reason": "cross_team_contract_read_denied"
+    },
+    {
+      "example_id": "ACT-05",
+      "actor": "legal_reviewer",
+      "action": "read_contract",
+      "contract_id": "cuad_0038374672b578e9",
+      "expected_allowed": true,
+      "reason": "legal_review_contract_access_permitted"
+    },
+    {
+      "example_id": "ACT-06",
+      "actor": "policy_admin",
+      "action": "read_contract",
+      "contract_id": "cuad_0038374672b578e9",
+      "expected_allowed": false,
+      "reason": "policy_admin_contract_read_denied"
+    },
+    {
+      "example_id": "ACT-07",
+      "actor": "analyst_alice",
+      "action": "publish_policy",
+      "contract_id": null,
+      "expected_allowed": false,
+      "reason": "analyst_policy_publish_denied"
+    },
+    {
+      "example_id": "ACT-08",
+      "actor": "analyst_alice",
+      "action": "approve_exception",
+      "contract_id": "cuad_0038374672b578e9",
+      "expected_allowed": false,
+      "reason": "analyst_self_approval_denied"
+    },
+    {
+      "example_id": "ACT-09",
+      "actor": "legal_reviewer",
+      "action": "approve_exception",
+      "contract_id": "cuad_0038374672b578e9",
+      "expected_allowed": true,
+      "reason": "legal_reviewer_exception_approval_permitted"
+    },
+    {
+      "example_id": "ACT-10",
+      "actor": "policy_admin",
+      "action": "publish_policy",
+      "contract_id": null,
+      "expected_allowed": true,
+      "reason": "policy_admin_policy_management_permitted"
+    }
+  ]
+}
