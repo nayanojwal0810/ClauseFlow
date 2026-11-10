@@ -1,0 +1,63 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Testing and linting
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Environment files and credentials
+.env
+.env.*
+*.env
+
+# Operating system junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Project blueprints and internal planning (must remain outside repository)
+ClauseFlow_Complete_Implementation_Blueprint.txt
+*.blueprint.txt
+
+# Raw archives and datasets
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+
+# Data directories (raw archives and processed contract texts must NOT go to GitHub)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Temporary / editor files
+*.tmp
+*~
+.idea/
+.vscode/
